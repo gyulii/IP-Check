@@ -1,8 +1,14 @@
 # For using RegX
 import re
 
+# To not close cmd automatically
+import os
+
+print(f"Program starting...\n")
+
 # Open file and read in lines
 filename = 'log.txt' 
+
 with open(filename) as file:
     lines = file.readlines()
     lines = [line.rstrip() for line in lines]
@@ -33,6 +39,8 @@ def find_ips(raw_line_data):
     solution = regx.findall(raw_line_data)
     return solution
 
+
+print(f"Errors:\n")
 
 # Find Port information, () means data is in groups
 # (\:) = have to start with ":" [group 0]
@@ -105,3 +113,9 @@ for i in ip_occurence_list:
 # Write the solution to file
 with open('data.txt', 'w') as f:
     f.writelines(final_solution)
+
+# Keep the messages on the screen
+
+print(f"\nProgram finished running\n")
+
+os.system('pause')
