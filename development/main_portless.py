@@ -79,9 +79,15 @@ for element in ip_list:
         ip_unique_list.append(element.destination)
 
 # Remove not needed IPs
+try:
+    ip_unique_list.remove("79.120.134.178")
+except:
+    print("79.120.134.178 was not found in the list")
 
-ip_unique_list.remove("79.120.134.178")
-ip_unique_list.remove("84.1.119.110")
+try:
+    ip_unique_list.remove("84.1.119.110")
+except:
+     print("84.1.119.110 was not found in the list")
 
 
 ip_occurence_list = []
