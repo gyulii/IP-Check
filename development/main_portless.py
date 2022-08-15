@@ -6,6 +6,9 @@ import os
 
 print(f"Program starting...\n")
 
+
+error_log = ""
+
 # Open file and read in lines
 filename = 'log.txt' 
 
@@ -40,7 +43,11 @@ def find_ips(raw_line_data):
     return solution
 
 
-print(f"Errors:\n")
+
+
+#print(f"Errors:\n")
+
+error_log = error_log + f"Errors:\n"
 
 # Find Port information, () means data is in groups
 # (\:) = have to start with ":" [group 0]
@@ -50,10 +57,12 @@ print(f"Errors:\n")
 # (\D+)? = optional non numeric like "length" [group 2]
 # (\d+) = one or more digit (port number) [group 3]
 def find_port(raw_line_data , line_number):
+    global error_log
     regx = re.compile(r'(\:) (\w+),?\s*(\D+)?\s*?(\d+)')
     solution = regx.search(raw_line_data)
     if(solution == None):
-        print(f"Line Error ({line_number + 1}): {raw_line_data}")
+       # print(f"Line Error ({line_number + 1}): {raw_line_data}")
+        error_log = error_log + f"Line Error ({line_number + 1}): {raw_line_data}\n"
     else:
         return solution.groups()
 
@@ -73,17 +82,19 @@ ip_unique_source_list = []
 
 ip_unique_destination_list = []
 
-# Find all unuique IP
+# Find all unique source
+
 for element in ip_list:
     if(element.source not in ip_unique_source_list):
         ip_unique_source_list.append(element.source)
+# Find all unique destinaton
 
 for element in ip_list:
     if(element.destination not in ip_unique_destination_list):
         ip_unique_destination_list.append(element.destination)
 
 
-
+# Find all unique ip
 for element in ip_list:
     if(element.source not in ip_unique_list):
         ip_unique_list.append(element.source)
@@ -99,11 +110,13 @@ try:
     ip_unique_list.remove("79.120.134.178")
 except:
     print("79.120.134.178 was not found in the list")
+    error_log = error_log + f"\n79.120.134.178 was not found in the list"
 
 try:
     ip_unique_list.remove("84.1.119.110")
 except:
      print("84.1.119.110 was not found in the list")
+     error_log = error_log + f"\n84.1.119.110 was not found in the list"
 
 
 
@@ -141,7 +154,7 @@ for occu in ip_occurence_list_before_mark:
     for entry in ip_list:
         if(occu.ip_number == entry.source):
             occu.occurence_number = occu.occurence_number + 1
-
+# Count after
 for occu in ip_occurence_list_after_mark:
     for entry in ip_list:
         if(occu.ip_number == entry.destination):
@@ -161,6 +174,7 @@ final_solution_before_mark= ""
 final_solution_after_mark= ""
 
 # Create the solution string
+
 for i in ip_occurence_list:
     final_solution = final_solution + f"IP: {i.ip_number} , Occurence: {i.occurence_number}\n"
 
@@ -174,12 +188,15 @@ for i in ip_occurence_list_after_mark:
 with open('data.txt', 'w') as f:
     f.writelines(final_solution)
 
+
 with open('data_source.txt', 'w') as f:
     f.writelines(final_solution_before_mark)
 
 with open('data_destination.txt', 'w') as f:
     f.writelines(final_solution_after_mark)
 
+with open('error_log.txt', 'w') as f:
+    f.writelines(error_log)
 # Keep the messages on the screen
 
 print(f"\nProgram finished running\n")
