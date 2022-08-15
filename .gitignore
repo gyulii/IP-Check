@@ -1,1 +1,3 @@
 .vscode/
+development/__pycache__
+development/old_data/
