@@ -69,7 +69,21 @@ for index , line in enumerate(lines):
 
 ip_unique_list = []
 
+ip_unique_source_list = []
+
+ip_unique_destination_list = []
+
 # Find all unuique IP
+for element in ip_list:
+    if(element.source not in ip_unique_source_list):
+        ip_unique_source_list.append(element.source)
+
+for element in ip_list:
+    if(element.destination not in ip_unique_destination_list):
+        ip_unique_destination_list.append(element.destination)
+
+
+
 for element in ip_list:
     if(element.source not in ip_unique_list):
         ip_unique_list.append(element.source)
@@ -77,6 +91,8 @@ for element in ip_list:
 for element in ip_list:
     if(element.destination not in ip_unique_list):
         ip_unique_list.append(element.destination)
+
+
 
 # Remove not needed IPs
 try:
@@ -90,11 +106,26 @@ except:
      print("84.1.119.110 was not found in the list")
 
 
+
 ip_occurence_list = []
+
+ip_occurence_list_before_mark = []
+
+ip_occurence_list_after_mark = []
+
 
 # Init list with Occurence class elements
 for element in ip_unique_list:
     ip_occurence_list.append(IP_Occurence(element , 0))
+
+# Init list with Occurence class elements before
+for element in ip_unique_source_list:
+    ip_occurence_list_before_mark.append(IP_Occurence(element , 0))
+    
+
+# Init list with Occurence class elements after
+for element in ip_unique_destination_list:
+    ip_occurence_list_after_mark.append(IP_Occurence(element , 0))
 
 
 # Count occurences
@@ -105,20 +136,49 @@ for occu in ip_occurence_list:
         if(occu.ip_number == entry.destination):
             occu.occurence_number = occu.occurence_number + 1
 
+ # Count before
+for occu in ip_occurence_list_before_mark:
+    for entry in ip_list:
+        if(occu.ip_number == entry.source):
+            occu.occurence_number = occu.occurence_number + 1
+
+for occu in ip_occurence_list_after_mark:
+    for entry in ip_list:
+        if(occu.ip_number == entry.destination):
+            occu.occurence_number = occu.occurence_number + 1 
 
 # Sort by occurence number
 ip_occurence_list.sort(key=lambda x: x.occurence_number, reverse=True)
 
+ip_occurence_list_before_mark.sort(key=lambda x: x.occurence_number, reverse=True)
+
+ip_occurence_list_after_mark.sort(key=lambda x: x.occurence_number, reverse=True)
+
 final_solution = ""
+
+final_solution_before_mark= ""
+
+final_solution_after_mark= ""
 
 # Create the solution string
 for i in ip_occurence_list:
     final_solution = final_solution + f"IP: {i.ip_number} , Occurence: {i.occurence_number}\n"
-    
+
+for i in ip_occurence_list_before_mark:
+    final_solution_before_mark = final_solution_before_mark + f"IP: {i.ip_number} , Occurence: {i.occurence_number}\n"
+
+for i in ip_occurence_list_after_mark:
+    final_solution_after_mark = final_solution_after_mark + f"IP: {i.ip_number} , Occurence: {i.occurence_number}\n"
 
 # Write the solution to file
 with open('data.txt', 'w') as f:
     f.writelines(final_solution)
+
+with open('data_source.txt', 'w') as f:
+    f.writelines(final_solution_before_mark)
+
+with open('data_destination.txt', 'w') as f:
+    f.writelines(final_solution_after_mark)
 
 # Keep the messages on the screen
 
