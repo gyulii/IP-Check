@@ -1,5 +1,4 @@
 IP: 91.228.167.21 , Occurence: 3819
-IP: 192.168.10.3 , Occurence: 3551
 IP: 172.16.32.242 , Occurence: 3161
 IP: 192.168.10.2 , Occurence: 2749
 IP: 192.168.10.139 , Occurence: 2023

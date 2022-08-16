@@ -146,6 +146,20 @@ for index , line in enumerate(lines):
         print(f"{line} was not found in the list")
         error_log = error_log + f"\n {line} was not found in the list"
 
+for index , line in enumerate(lines):
+    try:
+        ip_unique_source_list.remove(f"{line}")
+    except:
+        pass
+
+
+for index , line in enumerate(lines):
+    try:
+        ip_unique_destination_list.remove(f"{line}")
+    except:
+        pass
+
+
 
 ip_occurence_list = []
 
