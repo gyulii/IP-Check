@@ -2381,4 +2381,4 @@ Line Error (31857): 20:23:15.551390 ARP, Request who-has 192.168.10.31 tell 192.
 Line Error (32071): 20:23:16.403442 ARP, Request who-has 192.168.10.31 tell 192.168.10.173, length 46
 Line Error (32534): 20:23:17.396671 ARP, Request who-has 192.168.10.31 tell 192.168.10.173, length 46
 
-79.120.134.178 was not found in the list
+ 79.120.134.178 was not found in the list

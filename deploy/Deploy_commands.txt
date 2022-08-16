@@ -1,2 +1,2 @@
 python -m auto_py_to_exe
-pyinstaller --noconfirm --onefile --console  "D:/Python_projects/IP_Find/development/main_portless.py"
+pyinstaller --noconfirm --onefile --console  "D:/Python_projects/IP_Find/deploy/main_portless.py"

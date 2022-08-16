@@ -4,7 +4,10 @@ import re
 # To not close cmd automatically
 import os
 
+
+
 print(f"Program starting...\n")
+
 
 
 error_log = ""
@@ -106,18 +109,24 @@ for element in ip_list:
 
 
 # Remove not needed IPs
-try:
-    ip_unique_list.remove("79.120.134.178")
-except:
-    print("79.120.134.178 was not found in the list")
-    error_log = error_log + f"\n79.120.134.178 was not found in the list"
 
 try:
-    ip_unique_list.remove("84.1.119.110")
+    with open('config.ini') as file:
+        lines = file.readlines()
+        lines = [line.rstrip() for line in lines]
 except:
-     print("84.1.119.110 was not found in the list")
-     error_log = error_log + f"\n84.1.119.110 was not found in the list"
+    print("Error no config.ini was found\n")
+    print("The program will now exit\n")
+    os.system('pause')
+    exit()
 
+
+for index , line in enumerate(lines):
+    try:
+        ip_unique_list.remove(f"{line}")
+    except:
+        print(f"{line} was not found in the list")
+        error_log = error_log + f"\n {line} was not found in the list"
 
 
 ip_occurence_list = []
