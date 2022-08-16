@@ -3,6 +3,7 @@ import re
 
 # To not close cmd automatically
 import os
+from traceback import print_tb
 
 
 
@@ -125,6 +126,7 @@ for element in ip_list:
         ip_unique_list.append(element.destination)
 
 
+exc = []
 
 # Remove not needed IPs
 
@@ -132,28 +134,32 @@ try:
     with open('config.ini') as file:
         lines = file.readlines()
         lines = [line.rstrip() for line in lines]
+        regx = re.compile(r'\d+\.\d+\.\d+\.\d+')
+        for line in lines:
+            if(regx.search(line) != None):
+                exc.append(regx.search(line).group()
+)
 except:
     print("Error no config.ini was found\n")
     print("The program will now exit\n")
     os.system('pause')
     exit()
 
-
-for index , line in enumerate(lines):
+for index , line in enumerate(exc):
     try:
         ip_unique_list.remove(f"{line}")
     except:
         print(f"{line} was not found in the list")
         error_log = error_log + f"\n {line} was not found in the list"
 
-for index , line in enumerate(lines):
+for index , line in enumerate(exc):
     try:
         ip_unique_source_list.remove(f"{line}")
     except:
         pass
 
 
-for index , line in enumerate(lines):
+for index , line in enumerate(exc):
     try:
         ip_unique_destination_list.remove(f"{line}")
     except:
