@@ -71,12 +71,30 @@ def find_port(raw_line_data , line_number):
 
 ip_list = []
 
+filtered_log = ""
+
+
+try:
+    with open('filter.ini') as file:
+        row = file.readlines()
+        row = [line.rstrip() for line in row]
+except:
+    print("Error no filter.ini was found\n")
+
 # Create class list from each line
 for index , line in enumerate(lines):
     ips = find_ips(line)
     port = find_port(line , index)
     if(len(ips) >= 2 and port != None):
         ip_list.append(IP_Entry(ips[0] , ips[1] , port[1] , port[3]))
+        #Create filtered list based on filter.ini >> row
+        for filt in row:
+            if(filt == ips[0] or filt == ips[1]):
+                filtered_log = filtered_log + f"{line}\n"
+
+
+with open('log_filtered.txt', 'w') as f:
+    f.writelines(filtered_log)
 
 
 ip_unique_list = []
