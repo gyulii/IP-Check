@@ -79,7 +79,7 @@ filtered_log = ""
 exc = []
 
 try:
-    with open('config.ini') as file:
+    with open('settings/config.ini') as file:
         conf = file.readlines()
         conf = [line.rstrip() for line in conf]
         regx = re.compile(r'\d+\.\d+\.\d+\.\d+')
@@ -94,8 +94,9 @@ except:
     exit()
 
 
+
 try:
-    with open('filter.ini') as file:
+    with open('settings/filter.ini') as file:
         row = file.readlines()
         row = [line.rstrip() for line in row]
 except:
@@ -110,8 +111,9 @@ for index , line in enumerate(lines):
         #Create filtered list based on filter.ini >> row
         for filt in row:
 
-            if((filt == ips[0] or filt == ips[1]) and filt not in exc):
+            if((filt == ips[0] or filt == ips[1]) and (filt not in exc)):
                 filtered_log = filtered_log + f"{line}\n"
+                
 
 
 with open('log_filtered.txt', 'w') as f:
@@ -156,7 +158,7 @@ for index , line in enumerate(exc):
     try:
         ip_unique_list.remove(f"{line}")
     except:
-        print(f"{line} was not found in the list")
+        #print(f"{line} was not found in the list")
         error_log = error_log + f"\n {line} was not found in the list"
 
 for index , line in enumerate(exc):
