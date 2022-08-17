@@ -102,6 +102,8 @@ try:
 except:
     print("Error no filter.ini was found\n")
 
+
+
 # Create class list from each line
 for index , line in enumerate(lines):
     ips = find_ips(line)
@@ -110,9 +112,11 @@ for index , line in enumerate(lines):
         ip_list.append(IP_Entry(ips[0] , ips[1] , port[1] , port[3]))
         #Create filtered list based on filter.ini >> row
         for filt in row:
-
-            if((filt == ips[0] or filt == ips[1]) and (filt not in exc)):
-                filtered_log = filtered_log + f"{line}\n"
+            # Match to filter ok ?
+            if(filt == ips[0] or filt == ips[1]):
+                #Exclude if found in config.ini
+                if((ips[0] not in exc) and ips[1] not in exc):
+                    filtered_log = filtered_log + f"{line}\n"
                 
 
 
