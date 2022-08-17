@@ -72,7 +72,26 @@ def find_port(raw_line_data , line_number):
 
 ip_list = []
 
+filtered_ip_list = ip_list
+
 filtered_log = ""
+
+exc = []
+
+try:
+    with open('config.ini') as file:
+        conf = file.readlines()
+        conf = [line.rstrip() for line in conf]
+        regx = re.compile(r'\d+\.\d+\.\d+\.\d+')
+        for line in conf:
+            if(regx.search(line) != None):
+                exc.append(regx.search(line).group()
+)
+except:
+    print("Error no config.ini was found\n")
+    print("The program will now exit\n")
+    os.system('pause')
+    exit()
 
 
 try:
@@ -90,7 +109,8 @@ for index , line in enumerate(lines):
         ip_list.append(IP_Entry(ips[0] , ips[1] , port[1] , port[3]))
         #Create filtered list based on filter.ini >> row
         for filt in row:
-            if(filt == ips[0] or filt == ips[1]):
+
+            if((filt == ips[0] or filt == ips[1]) and filt not in exc):
                 filtered_log = filtered_log + f"{line}\n"
 
 
@@ -126,24 +146,11 @@ for element in ip_list:
         ip_unique_list.append(element.destination)
 
 
-exc = []
+
 
 # Remove not needed IPs
 
-try:
-    with open('config.ini') as file:
-        lines = file.readlines()
-        lines = [line.rstrip() for line in lines]
-        regx = re.compile(r'\d+\.\d+\.\d+\.\d+')
-        for line in lines:
-            if(regx.search(line) != None):
-                exc.append(regx.search(line).group()
-)
-except:
-    print("Error no config.ini was found\n")
-    print("The program will now exit\n")
-    os.system('pause')
-    exit()
+
 
 for index , line in enumerate(exc):
     try:
