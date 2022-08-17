@@ -109,7 +109,8 @@ for index , line in enumerate(lines):
     ips = find_ips(line)
     port = find_port(line , index)
     if(len(ips) >= 2 and port != None):
-        ip_list.append(IP_Entry(ips[0] , ips[1] , port[1] , port[3]))
+        if((ips[0] not in exc) and ips[1] not in exc):
+            ip_list.append(IP_Entry(ips[0] , ips[1] , port[1] , port[3]))
         #Create filtered list based on filter.ini >> row
         for filt in row:
             # Match to filter ok ?
