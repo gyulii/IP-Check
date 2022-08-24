@@ -7,6 +7,9 @@ from traceback import print_tb
 
 
 
+if __name__ == "__main__":
+    pass
+
 print(f"Program starting...\n")
 
 
