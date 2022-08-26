@@ -1,9 +1,0 @@
-Errors:
-Line Error (9): 20:06:58.087999 ARP, Request who-has 192.168.10.31 tell 192.168.10.173, length 46
-Line Error (13): 20:06:58.528758 ARP, Request who-has 192.168.10.168 tell 192.168.10.91, length 46
-Line Error (18): 20:06:58.888479 ARP, Request who-has 192.168.10.31 tell 192.168.10.173, length 46
-Line Error (23): 20:06:59.356528 ARP, Request who-has 192.168.10.168 tell 192.168.10.91, length 46
-
- 79.120.134.178 was not found in the list
- 142.251.39.10 was not found in the list
- 142.251.39.10 was not found in the list

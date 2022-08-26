@@ -1,4 +1,5 @@
 .vscode/
-development/__pycache__
-development/old_data/
-experiment/
+*__pycache__
+src/development/old_data/
+src/experiment/
+IP_Check.egg-info/
