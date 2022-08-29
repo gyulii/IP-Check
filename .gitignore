@@ -3,3 +3,4 @@
 src/development/old_data/
 src/experiment/
 IP_Check.egg-info/
+.env/
