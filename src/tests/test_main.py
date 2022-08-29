@@ -1,6 +1,6 @@
 
 
-from src.development.test_cls import fun
+from src.development.old.test_cls import fun
 
 
 def test_testing_test():
